@@ -8,33 +8,42 @@ Google Docs API:
 
 API Documentation: https://developers.google.com/docs
 Python Client Library: https://github.com/googleapis/google-api-python-client
-NLTK (Natural Language Toolkit):
+OpenAI API:
 
-Official Website: https://www.nltk.org/
-Documentation: https://www.nltk.org/api/nltk.html
-BERT Extractive Summarizer:
+API Documentation: https://beta.openai.com/docs/
+Python Client Library: https://github.com/openai/openai-cookbook/blob/main/examples/How_to_generate_text_using_the_OpenAI_API.md
+Project Structure:
 
-GitHub Repository: https://github.com/dmmiller612/bert-extractive-summarizer
-Google Text-to-Speech API:
-
-API Documentation: https://cloud.google.com/text-to-speech
-Python Client Library: https://github.com/googleapis/python-texttospeech
-
-https://chat.openai.com/share/4531049b-dcdf-49ad-874f-86b63e3699b7 link to setup chat
-
-google_summary_project/
-│-- README.md
-│-- requirements.txt
-│-- main.py
-│-- credentials.json
-│-- summarizer.py
-│-- text_to_speech.py
-│-- utils.py
-│-- data/
-│   │-- input_slides.pptx
-│   │-- input_doc.docx
-│-- venv/  (Virtual Environment - not included in the repository)
 ```
+    google_summary_project/
+    │-- README.md
+    │-- requirements.txt
+    │-- main.py
+    │-- credentials.json
+    │-- summarizer.py
+    │-- utils.py
+    │-- data/
+    │   │-- input_slides.pptx
+    │   │-- input_doc.docx
+    │-- venv/  (Virtual Environment - not included in the repository)
+
+```
+Regarding the summarization algorithm, since we're using OpenAI's GPT-3 model, the actual summarization will be handled by the model itself. Our task is to convert the document content into a format that can be passed to the model for summarization.
+
+Here's a high-level overview of how the summarization process might look like:
+
+Receive Attachment: The user attaches a document file using the UI.
+
+Identify File Type: The application identifies the file type based on the file extension.
+
+Read Document: Depending on the file type, the application uses the appropriate API (Google Slides or Google Docs API) to read the document and convert it to plain text.
+
+Summarize Text: The application passes the plain text to the OpenAI API, which returns a summarized version of the text.
+
+Display Summary: The summarized text is displayed on the UI.
+
+The summarizer.py script will contain the function that interacts with the OpenAI API to generate the summary. The utils.py script can contain helper functions for identifying the file type, reading the document, and converting it to plain text. The main.py script will orchestrate the whole process and update the UI based on the results.
+
 
 Let's briefly go through each file and directory:
 
