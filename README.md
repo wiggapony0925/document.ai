@@ -1,18 +1,24 @@
 # document.ai
+## Docs Summarizer
 
-Google Slides API:
+This application allows you to summarize text from `.txt` or `.pdf` files using OpenAI's GPT-3 model. You can select different instructions and styles for the summarization.
 
-API Documentation: https://developers.google.com/slides
-Python Client Library: https://github.com/googleapis/google-api-python-client
-Google Docs API:
+## Setup
 
-API Documentation: https://developers.google.com/docs
-Python Client Library: https://github.com/googleapis/google-api-python-client
-OpenAI API:
+1. Clone this repository to your local machine.
+2. Install the required Python libraries by running `pip install -r requirements.txt` in your command line.
+3. Obtain an API key from OpenAI and add it to a `.env` file in the project root directory in the format `OPENAI_API_KEY=your-openai-api-key`.
+4. Run `main.py` to start the application.
 
-API Documentation: https://beta.openai.com/docs/
-Python Client Library: https://github.com/openai/openai-cookbook/blob/main/examples/How_to_generate_text_using_the_OpenAI_API.md
-Project Structure:
+## Usage
+
+1. Click the "Attach File" button to select a `.txt` or `.pdf` file.
+2. Select an instruction and a style for the summarization from the dropdowns, or enter your own instruction or style.
+3. Click the "Summarize" button to generate a summary of the file content. The summary will be displayed in the output text box.
+
+## License
+
+This project is licensed under the terms of the MIT license.
 
 ```
     google_summary_project/
@@ -64,3 +70,5 @@ Let's briefly go through each file and directory:
 8. `data/`: A directory to store input files, such as Google Slides or Docs files, that you want to summarize.
 
 9. `venv/`: The virtual environment directory where the Python virtual environment will be created. This directory is not included in the repository and is created when you set up the virtual environment.
+
+Local File Reading: If your users are going to be uploading text files (.txt) or PDFs (.pdf), your application could directly read these files from the local machine and convert the contents into plain text. For text files, you can use Python's built-in file reading functions. For PDF files, you can use a library like PyPDF2 or pdftotext.
