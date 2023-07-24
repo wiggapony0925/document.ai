@@ -50,6 +50,10 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 
+#json file
+airy-runway-393822-aee170c95c4e.json
+.airy-runway-393822-aee170c95c4e.json
+
 # nyc test coverage
 .nyc_output
 
