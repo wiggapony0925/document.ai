@@ -2,9 +2,11 @@ import tkinter as tk
 from tkinter import ttk, filedialog
 import os
 import webbrowser
-#from summarizer import summarize_text
+from summarizer import summarize_text
 
 attached_file = None
+
+import PyPDF2
 
 def browse_file():
     global attached_file
@@ -13,8 +15,6 @@ def browse_file():
         title="Select a file",
         filetypes=(
             ("PDF files", "*.pdf"),
-            ("Google Slides", "*.pptx"),
-            ("Word Documents", "*.docx"),
             ("Text files", "*.txt"),
         ),
     )
@@ -23,10 +23,21 @@ def browse_file():
         file_name = os.path.basename(file_path)
         file_type = os.path.splitext(file_path)[1].lstrip(".").upper()
         file_info.config(text=f"File Name: {file_name}\nFile Type: {file_type}")
-        with open(file_path, "r", encoding="utf-8") as file:
-            file_content = file.read()
-            input_text.delete("1.0", tk.END)
-            input_text.insert(tk.END, f"File Name: {file_name}\nFile Type: {file_type}\n\n{file_content}")
+
+        if file_type == "TXT":
+            with open(file_path, "r", encoding="utf-8") as file:
+                file_content = file.read()
+        elif file_type == "PDF":
+            with open(file_path, "rb") as file:
+                pdf_reader = PyPDF2.PdfFileReader(file)
+                file_content = ""
+                for page_num in range(pdf_reader.getNumPages()):
+                    page = pdf_reader.getPage(page_num)
+                    file_content += page.extractText()
+
+        input_text.delete("1.0", tk.END)
+        input_text.insert(tk.END, f"File Name: {file_name}\nFile Type: {file_type}\n\n{file_content}")
+
 
 def open_file():
     if attached_file:
@@ -42,8 +53,8 @@ def summarize_button_click():
     
     # Process the user input, fetch content from Google Slides/Docs, etc.
     # Perform summarization using the summarize_text function from summarizer.py
-    summary = "" # summarize_text(user_input, instruction=selected_instruction, style=selected_style)
-    
+    summary = summarize_text(user_input, instruction=selected_instruction, style=selected_style) # summarize_text(user_input, instruction=selected_instruction, style=selected_style)
+
     # Display the summary in the output text box
     output_text.delete("1.0", tk.END)
     output_text.insert(tk.END, summary)
