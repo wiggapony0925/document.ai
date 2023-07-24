@@ -1,0 +1,6 @@
+google-api-python-client==2.28.0
+google-auth-httplib2==0.1.0
+google-auth-oauthlib==0.4.6
+nltk==3.6.5
+bert-extractive-summarizer==0.8.1
+gTTS==2.2.3
